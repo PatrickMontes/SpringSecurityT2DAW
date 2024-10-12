@@ -10,6 +10,7 @@ public class UsuarioResponseDTO {
     private Long id;
     private String codigo;
     private String mensaje;
+    private String tiempoExpiracion;
     private String token;
 
 }

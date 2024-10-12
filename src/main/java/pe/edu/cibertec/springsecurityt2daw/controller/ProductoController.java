@@ -24,7 +24,7 @@ public class ProductoController {
     }
 
 
-    @PreAuthorize("hasRole('GESTOR')")
+    @PreAuthorize("hasAuthority('GESTOR')")
     @PostMapping("/crear")
     public ResponseEntity<Producto> crear(@RequestBody Producto producto) {
         return ResponseEntity.ok(productoService.crearProducto(producto));

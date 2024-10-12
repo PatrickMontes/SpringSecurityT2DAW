@@ -3,6 +3,7 @@ package pe.edu.cibertec.springsecurityt2daw.security.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -14,20 +15,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.function.Function;
 
+@Slf4j
 @Service
 public class JwtUtil {
 
     private SecretKey secretKey;
 
-    @Value("${claveJwt}")
-    private String claveJwt;
+    @Value("${claveJwtString}")
+    private String claveJwtString;
 
 
     @PostConstruct
     public void init() {
-        byte[] keyBytes = claveJwt.getBytes(StandardCharsets.UTF_8);
+        byte[] keyBytes = claveJwtString.getBytes(StandardCharsets.UTF_8);
         secretKey = new SecretKeySpec(keyBytes, "HmacSHA256");
     }
+
 
     public String generarToken(Usuario usuario) {
         String username = usuario.getCodigo();
@@ -39,7 +42,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 300000000))
+                .expiration(new Date(System.currentTimeMillis() + 180000 ))
                 .signWith(secretKey)
                 .compact();
     }
@@ -64,4 +67,5 @@ public class JwtUtil {
     private boolean esTokenExpirado(String token) {
         return extractClaims(token, Claims::getExpiration).before(new Date());
     }
+
 }

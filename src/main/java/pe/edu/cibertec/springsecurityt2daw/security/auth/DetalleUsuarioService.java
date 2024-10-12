@@ -16,11 +16,13 @@ public class DetalleUsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = this.usuarioRepository.findByCodigo(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+        Usuario usuario = this.usuarioRepository.findByCodigo(username).orElseThrow(
+                () -> new RuntimeException("Usuario no encontrado")
+        );
 
         return AuthUsuario.builder()
                 .usuario(usuario)
                 .build();
     }
+
 }

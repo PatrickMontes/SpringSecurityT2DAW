@@ -8,7 +8,5 @@ public interface IUsuarioService {
 
     UsuarioResponseDTO registrarUsuario(Usuario usuario);
     UsuarioResponseDTO loginUsuario(LoginDTO login);
-    UsuarioResponseDTO getUsuarioPorCodigo(String codigo);
-    UsuarioResponseDTO editarUsuario(Long id, Usuario usuario);
 
 }

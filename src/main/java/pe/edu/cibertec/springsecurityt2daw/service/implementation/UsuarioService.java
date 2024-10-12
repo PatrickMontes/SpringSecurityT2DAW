@@ -55,31 +55,5 @@ public class UsuarioService implements IUsuarioService {
                 .build();
     }
 
-    @Override
-    public UsuarioResponseDTO getUsuarioPorCodigo(String codigo) {
-        Usuario usuario = this.usuarioRepository.findByCodigo(codigo).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        return UsuarioResponseDTO.builder()
-                .mensaje("Usuario encontrado")
-                .usuario(usuario)
-                .build();
-    }
-
-
-    @Override
-    public UsuarioResponseDTO editarUsuario(Long id, Usuario usuario) {
-        Usuario usuarioExistente = this.usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        usuarioExistente.setCodigo(usuario.getCodigo());
-        usuarioExistente.setEmail(usuario.getEmail());
-        usuarioExistente.setRol(usuario.getRol());
-        usuarioExistente.setActivo(usuario.getActivo());
-
-        this.usuarioRepository.save(usuarioExistente);
-
-        return UsuarioResponseDTO.builder()
-                .mensaje("Usuario editado correctamente")
-                .usuario(usuarioExistente)
-                .build();
-    }
 
 }

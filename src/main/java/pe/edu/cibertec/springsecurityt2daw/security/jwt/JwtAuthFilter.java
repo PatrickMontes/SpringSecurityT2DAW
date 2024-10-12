@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,12 +18,14 @@ import pe.edu.cibertec.springsecurityt2daw.security.auth.DetalleUsuarioService;
 
 import java.io.IOException;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-    private final DetalleUsuarioService detalleUsuarioService;
+    private final DetalleUsuarioService customUsuarioDetailService;
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -30,9 +33,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if(token != null) {
             String username = this.jwtUtil.getUsernameFromToken(token);
-            UserDetails userDetails = this.detalleUsuarioService.loadUserByUsername(username);
+            UserDetails userDetails = this.customUsuarioDetailService.loadUserByUsername(username);
 
             if(StringUtils.hasText(username) && jwtUtil.esTokenValido(token, userDetails)) {
+                log.info("Usuario encontrado: {}", username);
 
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -54,5 +58,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         return null;
     }
-}
 
+
+}

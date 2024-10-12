@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "08e17d05-2a1a-4b19-91a7-1a76ae60b105",
+		"name": "T2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34102124"
+	},
+	"item": [
+		{
+			"name": "RegistrarUsuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo\": \"usuarioGestor\",\r\n    \"password\": \"123\",\r\n    \"email\": \"usuarioGestor@gmail.com\",\r\n    \"rol\": \"GESTOR\",\r\n    \"activo\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/registrar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginUsuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo\": \"usuarioGestor\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearProducto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Ropa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/producto/crear",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producto",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllProducto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/producto/findAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producto",
+						"findAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarProducto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Ropa de Invierno\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/producto/actualizar/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producto",
+						"actualizar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

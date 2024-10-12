@@ -23,14 +23,12 @@ public class AuthController {
     }
 
 
-    @PreAuthorize("hasRole('GESTOR')")
     @PostMapping("/registrar")
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(usuarioService.registrarUsuario(usuario));
     }
 
 
-    @PreAuthorize("hasRole('COORDINADOR')")
     @GetMapping("/obtener/{codigo}")
     public ResponseEntity<UsuarioResponseDTO> getUsuarioPorCodigo(@PathVariable String codigo) {
         return ResponseEntity.ok(usuarioService.getUsuarioPorCodigo(codigo));

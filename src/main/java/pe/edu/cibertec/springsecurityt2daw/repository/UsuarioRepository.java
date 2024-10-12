@@ -6,5 +6,5 @@ import pe.edu.cibertec.springsecurityt2daw.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
+    Usuario findByCodigo(String codigo);
 }
